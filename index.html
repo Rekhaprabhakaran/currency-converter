@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>currency converter</title>
+    </head>
+    <body style="text-align: center; margin-top: 100px;">
+        
+       <span> <select id="list1" style="width: 200px; margin-right: 60px;height: 30px;" >
+            <option id="INR1">INR</option>
+            <option id="USD1">USD</option>
+            <option id="AED1">AED</option>
+            <option id="CAD1">CAD</option>
+            <option id="EUR1">EUR</option>
+            <option id="QAR1">QAR</option>
+            <option id="OMR1">OMR</option>
+            <option id="BND1">BND</option>
+            <option id="KWD1">KWD</option>
+            <option id="GMD1">GMD</option>
+        </select></span>
+      <span><img src="arrow.png" style="width: 40px;height: 30px; margin-right: 50px;margin-top: 120px;"></span>
+       
+        <select id="list2" style="width: 200px; margin-right: 50px;height: 30px">
+            <option id="INR2">INR</option>
+            <option id="USD2">USD</option>
+            <option id="AED2">AED</option>
+            <option id="CAD2">CAD</option>
+            <option id="EUR2">EUR</option>
+            <option id="QAR2">QAR</option>
+            <option id="OMR2">OMR</option>
+            <option id="BND2">BND</option>
+            <option id="KWD2">KWD</option>
+            <option id="GMD2">GMD</option>
+        </select><br><br><br>
+
+       <button onclick="getData()" style="background-color: aquamarine;">convert</button><br><br>
+
+       <label id="result" style="font-size: 30px; color: blue; font-weight: bold; font-family: Georgia, 'Times New Roman', Times, serif;"></label>
+
+
+        <script>
+
+             var API="https://v6.exchangerate-api.com/v6/1ff2d5fdf8f39c80db616c88/latest/USD";
+              var selected_1="";
+              var selected_2="";
+
+              async function getData()
+                { var response=await fetch(API);
+                 var data=await response.json();
+                 converter(data);
+                
+               }
+
+             function converter(data){
+                var selected_1=document.getElementById("list1").value;
+                var selected_2=document.getElementById("list2").value;
+                console.log(data.conversion_rates);
+
+                 console.log(selected_1);
+                 console.log(selected_2);
+
+                 var value1=data.conversion_rates[selected_1];
+                 var value2=data.conversion_rates[selected_2];
+
+                 var answer=(1/value1)*value2;
+                 document.getElementById("result").innerHTML=answer.toFixed(2);
+                
+                }
+            
+                 
+            
+                  
+             
+            
+
+            
+        </script>
+    </body>
+</html>
